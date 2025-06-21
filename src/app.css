@@ -1,0 +1,26 @@
+/* src/app.css */
+body {
+color: black;
+font-family: ubuntu;
+  background-color: white;
+  text-align: center;
+}
+
+button {
+  background-color: white;
+  color: black;
+}
+
+button:hover {
+  background-color: orange;
+}
+h1{
+background-color: lightblue;
+padding: 10px;
+}
+h1 img {
+   /*padding: 0px; */
+  float: right;
+  height: 75px;
+}
+
