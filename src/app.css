@@ -1,21 +1,35 @@
 /* src/app.css */
 body {
-color: black;
+color: white;
 font-family: ubuntu;
   background-color: white;
   text-align: center;
+
+  background-image: url("fundo.jpg");
+            background-size: cover;      /* Faz a imagem cobrir toda a tela */
+            background-repeat: no-repeat; /* Não repete a imagem */ 
+            background-position: center; 
+
+          
+
+           
+ 
 }
+
+
 
 button {
   background-color: white;
   color: black;
+  border-radius: 5px;
 }
 
 button:hover {
-  background-color: orange;
+  background-color: lightgreen;
 }
 h1{
-background-color: lightblue;
+text-align: left;
+background-color:;
 padding: 10px;
 }
 h1 img {
@@ -24,3 +38,13 @@ h1 img {
   height: 75px;
 }
 
+.container {
+  display: flex;
+  gap: 40px; /* espaço entre as tabelas */
+  justify-content: center; /* centraliza horizontalmente */
+  align-items: flex-start; /* alinha pelo topo */
+}
+
+table {
+  border-collapse: collapse;
+}

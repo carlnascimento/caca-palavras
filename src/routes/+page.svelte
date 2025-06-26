@@ -21,19 +21,35 @@
 </p>
 
 <hr />
-<br />
+<br /><div class="container">
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <a href="/jogo"><button>Iniciar Jogo</button></a>
+          <br /><br />
+          <a href="/sobre"><button>Sobre o Jogo</button></a>
+          <br /><br />
+          <a href="/ajuda"><button>Ajuda</button></a>
+          <br /><br />
+          <a href="/ranking"><button>Ranking</button></a>
+          <br /><br />
+          <a href="/sair"><button>Sair</button></a>
+          <br /><br />
+          <button on:click={funcao}>Executar Função</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<button on:click={() => navegar('jogo.html')}>Iniciar Jogo</button>
-<br /><br />
-<button on:click={() => navegar('sobre.html')}>Sobre o Jogo</button>
-<br /><br />
-<button on:click={() => navegar('ajuda.html')}>Ajuda</button>
-<br /><br />
-<button on:click={() => navegar('ranking.html')}>Ranking</button>
-<br /><br />
-<button on:click={() => navegar('sair.html')}>Sair</button>
-<br /><br />
-<button on:click={funcao}>Executar Função</button>
-
-<hr />
+  <table>
+    <tbody>
+      <tr>
+        <td style="text-align: right;">
+          <img src="/manu.png" height="350" width="auto" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div><hr />
 
