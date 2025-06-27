@@ -36,7 +36,11 @@
           <br /><br />
           <a href="/sair"><button>Sair</button></a>
           <br /><br />
+
+          <!--
           <button on:click={funcao}>Executar Função</button>
+
+          -->
         </td>
       </tr>
     </tbody>

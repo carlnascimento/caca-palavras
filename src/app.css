@@ -19,13 +19,15 @@ font-family: ubuntu;
 
 
 button {
-  background-color: white;
+  background-color: orange;
   color: black;
-  border-radius: 5px;
+  border: 2px solid black;
+  border-radius: 25px;
+  padding: 15px 30px;
 }
 
 button:hover {
-  background-color: lightgreen;
+  background-color: beige;
 }
 h1{
 text-align: left;
