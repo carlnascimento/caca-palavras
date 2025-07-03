@@ -1,24 +1,16 @@
-  <script>
-  function funcao() {
-      alert("Aqui na quebrada os função nós entrega pros 190, parça");
-  }
-
-
-
-
-</script>
     
 
 
 <h1>
-  Iniciar
+  Start
   <img src="/if.png" alt="Logo do Instituto Federal Pernambuco" />
 </h1>
 
-<p>
-  Bem-vindo | Welcome | Bienvenue | Willkommen | Bienvenido | Benvenuto | ようこそ | 欢迎 | Добро пожаловать |
+
+<h2>
+  Bem-vindo | Welcome | Bienvenue | Willkommen | Bienvenido | <br/> Benvenuto | ようこそ | 欢迎 | Добро пожаловать |
   أهلاً وسهلاً | 환영합니다 | स्वागत है
-</p>
+</h2>
 
 <hr />
 <br /><div class="container">
@@ -26,16 +18,15 @@
     <tbody>
       <tr>
         <td>
-          <a href="/jogo"><button>Iniciar Jogo</button></a>
+          <a href="/jogo"><button>Start the Game</button></a>
           <br /><br />
-          <a href="/sobre"><button>Sobre o Jogo</button></a>
+          <a href="/sobre"><button>About</button></a>
           <br /><br />
-          <a href="/ajuda"><button>Ajuda</button></a>
+          <a href="/ajuda"><button>Help</button></a>
           <br /><br />
           <a href="/ranking"><button>Ranking</button></a>
           <br /><br />
-          <a href="/sair"><button>Sair</button></a>
-          <br /><br />
+          
 
           <!--
           <button on:click={funcao}>Executar Função</button>
@@ -55,5 +46,7 @@
       </tr>
     </tbody>
   </table>
-</div><hr />
+</div>
+<h3>Log out</h3>
 
+<hr />
