@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  const palavras = ["SVELTE", "HTML", "CSS", "JAVASCRIPT"];
+  const palavras = ["AVIÃO", "CARRO", "TREM", "REELS"];
   const tamanho = 10;
 
   let grade: string[][] = [];
@@ -139,12 +139,13 @@
         class:found={palavrasEncontradas.includes(palavra)}
         disabled={palavrasEncontradas.includes(palavra)}
       >
+      
         {palavra}
       </button>
     </li>
   {/each}
 </ul>
 
-<br />
+
 <button on:click={verificarSelecao}>Verificar Palavra</button>
 

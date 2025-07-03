@@ -79,11 +79,7 @@ table.caca-palavras {
   background-color: yellow; /* Fundo da grade */
 }
 
-table.caca-palavras {
-  margin: auto;
-  border-collapse: collapse;
-  background-color: yellow; /* fundo da grade */
-}
+
 
 table.caca-palavras td {
   border: 1px solid black;
@@ -99,4 +95,53 @@ table.caca-palavras td.selected {
   background-color: green;
   color: white; /* letras brancas sobre fundo verde */
 }
+.participantes-tabela img {
+  width: 150px;
+  height: auto;
+ 
+ 
+}
+.about-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.about-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-if {
+  height: 80px;
+  width: auto;
+}
+
+.tabelas-wrapper {
+  display: flex;
+  gap: 2rem; /* espaço entre as tabelas */
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.participantes-tabela {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 400px;
+}
+
+.participantes-tabela td {
+  padding: 8px;
+  vertical-align: middle;
+  border-bottom: 1px solid #ccc;
+}
+
+.participantes-tabela img {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
 

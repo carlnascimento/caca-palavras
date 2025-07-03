@@ -1,6 +1,8 @@
+
+
 <h1>
   Start
-  <img src="/if.png" alt="Logo do Instituto Federal Pernambuco" />
+  
 </h1>
 
 <h2>
