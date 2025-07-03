@@ -1,11 +1,7 @@
-    
-
-
 <h1>
   Start
   <img src="/if.png" alt="Logo do Instituto Federal Pernambuco" />
 </h1>
-
 
 <h2>
   Bem-vindo | Welcome | Bienvenue | Willkommen | Bienvenido | <br/> Benvenuto | ようこそ | 欢迎 | Добро пожаловать |
@@ -26,12 +22,6 @@
           <br /><br />
           <a href="/ranking"><button>Ranking</button></a>
           <br /><br />
-          
-
-          <!--
-          <button on:click={funcao}>Executar Função</button>
-
-          -->
         </td>
       </tr>
     </tbody>
