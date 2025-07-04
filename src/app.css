@@ -45,19 +45,20 @@ button {
 button:hover {
   background-color: beige;
 }
-h1{
-
-/*
-font-family: "Terminator Real NFI";
-
-*/
-text-align: left;
-background-color:;
-padding: 10px;
+@font-face {
+  font-family: "Choko";
+  src: url("/fonts/Choko.ttf") format("truetype");
 }
+
+h1 {
+  font-family: "Choko", sans-serif;
+   font-size: 4rem;
+   color: orange;
+}
+
 h1 img {
    /*padding: 0px; */
-  float: right;
+  float:right;
   height: 75px;
 }
 
@@ -144,4 +145,26 @@ table.caca-palavras td.selected {
   object-fit: cover;
 }
 
+
+
+.botao2 h3 {
+    background-color: orange;
+  color: black;
+  border: 2px solid black;
+  border-radius: 25px;
+  padding: 10px 20px;
+     
+  text-align: left;
+  font-size: 16px;
+  font-family: sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  line-height: 30px; /* Alinhamento vertical do texto dentro do h3 */
+  margin: 0;         /* Remove margem padrão do h3 */
+}
 

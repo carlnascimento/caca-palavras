@@ -1,15 +1,10 @@
 
 
+
 <h1>
-  Start
-  
+Enchanted Hunt
+
 </h1>
-
-<h2>
-  Bem-vindo | Welcome | Bienvenue | Willkommen | Bienvenido | <br/> Benvenuto | ようこそ | 欢迎 | Добро пожаловать |
-  أهلاً وسهلاً | 환영합니다 | स्वागत है
-</h2>
-
 <hr />
 <br /><div class="container">
   <table>
@@ -39,6 +34,10 @@
     </tbody>
   </table>
 </div>
-<h3>Log out</h3>
+<div class="botao2">
+  <h3>Log out</h3>
+</div>
+
+
 
 <hr />
