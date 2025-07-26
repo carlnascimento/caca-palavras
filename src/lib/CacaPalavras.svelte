@@ -1,151 +1,158 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+	import { onMount } from 'svelte';
 
-  const palavras = ["AVIÃO", "CARRO", "TREM", "REELS"];
-  const tamanho = 10;
+	let texto =
+		"A energia solar e a energia eólica são fontes de energia limpa. O uso de energia renovável é essencial para reduzir as emissões de carbono.";
 
-  let grade: string[][] = [];
-  let selecao: [number, number][] = [];
-  let palavrasEncontradas: string[] = [];
+	const palavrasParaEncontrar = ["energia", "solar", "eólica", "limpa", "renovável", "carbono"];
+	let palavrasEncontradas: string[] = [];
 
-  function gerarGrade() {
-    grade = Array.from({ length: tamanho }, () =>
-      Array.from({ length: tamanho }, () =>
-        String.fromCharCode(65 + Math.floor(Math.random() * 26))
-      )
-    );
+	let pontuacao = 0;
+	let tempo = 0;
+	let intervalo: any;
 
-    palavras.forEach(palavra => {
-      const linha = Math.floor(Math.random() * tamanho);
-      const inicio = Math.floor(Math.random() * (tamanho - palavra.length));
-      for (let i = 0; i < palavra.length; i++) {
-        grade[linha][inicio + i] = palavra[i];
-      }
-    });
-  }
+	// Iniciar o cronômetro ao montar o componente
+	onMount(() => {
+		intervalo = setInterval(() => tempo++, 1000);
+	});
 
-  function selecionarLetra(i: number, j: number) {
-    const index = selecao.findIndex(([x, y]) => x === i && y === j);
-    if (index > -1) {
-      selecao.splice(index, 1);
-    } else {
-      selecao.push([i, j]);
-    }
-  }
+	// Parar cronômetro quando todas as palavras forem encontradas
+	$: if (palavrasEncontradas.length === palavrasParaEncontrar.length) {
+		clearInterval(intervalo);
+	}
 
-  function verificarSelecao() {
-    const letras = selecao.map(([x, y]) => grade[x][y]).join("");
-    if (palavras.includes(letras)) {
-      if (!palavrasEncontradas.includes(letras)) {
-        palavrasEncontradas.push(letras);
-      }
-      alert(`Você encontrou: ${letras}`);
-    } else {
-      alert("Palavra incorreta");
-    }
-    selecao = [];
-  }
+	// Função para verificar se o texto selecionado é uma palavra válida
+	function verificarSelecao() {
+		const selecionadoBruto = window.getSelection()?.toString().trim().toLowerCase();
 
-  onMount(() => {
-    gerarGrade();
-  });
+		if (!selecionadoBruto) return;
+
+		const selecionado = selecionadoBruto
+			.normalize('NFD')
+			.replace(/[\u0300-\u036f]/g, '') // Remove acentos
+			.replace(/[.,!?;:]/g, ''); // Remove pontuação
+
+		for (const palavra of palavrasParaEncontrar) {
+			const palavraNormalizada = palavra
+				.normalize('NFD')
+				.replace(/[\u0300-\u036f]/g, '');
+
+			if (selecionado === palavraNormalizada && !palavrasEncontradas.includes(palavra)) {
+				palavrasEncontradas = [...palavrasEncontradas, palavra];
+				pontuacao += 10;
+			}
+		}
+	}
+
+	// Verifica se uma palavra já foi encontrada
+	function palavraJaEncontrada(palavra: string) {
+		return palavrasEncontradas.includes(palavra);
+	}
+
+	// Função para destacar visualmente as palavras no texto
+	function destacarTexto(texto: string): string {
+		let resultado = texto;
+
+		for (const palavra of palavrasParaEncontrar) {
+			const encontrado = palavrasEncontradas.includes(palavra);
+			const classe = encontrado ? "encontrada animada" : "para-encontrar";
+
+			const regex = new RegExp(`\\b(${palavra})\\b`, 'gi');
+			resultado = resultado.replace(regex, `<span class="${classe}">$1</span>`);
+		}
+
+		return resultado;
+	}
 </script>
 
 <style>
-  table.caca-palavras {
-    margin: auto;
-    border-collapse: collapse;
-    background-color: yellow;
-  }
+	.container {
+		display: flex;
+		gap: 2rem;
+		padding: 2rem;
+		flex-wrap: wrap;
+	}
 
-  table.caca-palavras td {
-    border: 1px solid black;
-    width: 32px;
-    height: 32px;
-    text-align: center;
-    font-weight: bold;
-    cursor: pointer;
-    color: black;
-  }
+	.texto {
+		width: 60%;
+		border: 1px solid #ccc;
+		padding: 1rem;
+		cursor: text;
+		user-select: text;
+		line-height: 1.6;
+		font-size: 1.1rem;
+	}
 
-  table.caca-palavras td.selected {
-    background-color: green;
-    color: white;
-  }
+	.tabela {
+		width: 30%;
+	}
 
-  ul {
-    list-style: none;
-    padding: 0;
-    text-align: center;
-    margin: 0 auto;
-  }
+	.encontrada {
+		background-color: yellow;
+		font-weight: bold;
+	}
 
-  ul li {
-    display: inline-block;
-    margin: 0 12px;
-  }
+	.para-encontrar {
+		background-color: transparent;
+	}
 
-  button {
-    padding: 6px 12px;
-    margin: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.1s ease;
-    border: 2px solid #444;
-    background-color: #eee;
-    user-select: none;
-    white-space: nowrap;
-  }
+	.encontrada-lista {
+		color: green;
+		text-decoration: line-through;
+		font-weight: bold;
+	}
 
-  button:active {
-    transform: translateY(2px);
-    box-shadow: none;
-  }
+	.lista-palavras li {
+		margin-bottom: 0.5rem;
+		font-size: 1.1rem;
+	}
 
-  button.found {
-    background-color: #4caf50;
-    color: white;
-    border-color: #3e8e41;
-    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3);
-    cursor: default;
-    transform: translateY(2px);
-  }
+	.pontuacao {
+		margin-top: 1rem;
+		font-size: 1.2rem;
+		font-weight: bold;
+	}
+
+	.tempo {
+		margin-top: 0.5rem;
+		font-size: 1rem;
+		color: #555;
+	}
+
+	.animada {
+		animation: flash 0.5s ease-in-out;
+	}
+
+	@keyframes flash {
+		0% {
+			background-color: yellow;
+		}
+		50% {
+			background-color: orange;
+		}
+		100% {
+			background-color: yellow;
+		}
+	}
 </style>
 
-<h2>Jogo de Caça-Palavras</h2>
+<div class="container" on:mouseup={verificarSelecao}>
+	<div class="texto">
+		{@html destacarTexto(texto)}
+	</div>
 
-<table class="caca-palavras">
-  {#each grade as linha, i}
-    <tr>
-      {#each linha as letra, j}
-        <td
-          on:click={() => selecionarLetra(i, j)}
-          class:selected={selecao.some(([x, y]) => x === i && y === j)}
-        >
-          {letra}
-        </td>
-      {/each}
-    </tr>
-  {/each}
-</table>
+	<div class="tabela">
+		<h3>Palavras para encontrar</h3>
+		<ul class="lista-palavras">
+			{#each palavrasParaEncontrar as palavra}
+				<li class:encontrada-lista={palavraJaEncontrada(palavra)}>
+					{palavra}
+				</li>
+			{/each}
+		</ul>
 
-<br />
-
-<h4>Palavras para encontrar:</h4>
-<ul>
-  {#each palavras as palavra}
-    <li>
-      <button
-        class:found={palavrasEncontradas.includes(palavra)}
-        disabled={palavrasEncontradas.includes(palavra)}
-      >
-      
-        {palavra}
-      </button>
-    </li>
-  {/each}
-</ul>
-
-
-<button on:click={verificarSelecao}>Verificar Palavra</button>
+		<div class="pontuacao">Pontuação: {pontuacao}</div>
+		<div class="tempo">Tempo: {tempo} segundos</div>
+	</div>
+</div>
 
