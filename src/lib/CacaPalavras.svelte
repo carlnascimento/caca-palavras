@@ -155,7 +155,9 @@
 	li.encontrada {
 		color: green;
 		background-color: rgba(200, 255, 200, 0.6);
-	}
+}
+
+	
 </style>
 <center>
 <div class="container">

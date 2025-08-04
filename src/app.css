@@ -1,50 +1,39 @@
 /* src/app.css */
 body {
-color: white;
-font-family: ubuntu;
+  color: white;
+  font-family: ubuntu;
   background-color: white;
   text-align: center;
 
   background-image: url("fundo.jpg");
-            background-size: cover;      /* Faz a imagem cobrir toda a tela */
-            background-repeat: no-repeat; /* Não repete a imagem */ 
-            background-position: center; 
-
-          
-
-           
- 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-
-h3{
-
-
-float: left;
+h3 {
+  float: left;
 }
-
 
 button {
   background-color: orange;
   color: black;
   border: 2px solid black;
   border-radius: 25px;
-  padding: 15px 30px;
-  width: 160px;    /* Largura fixa */
-  height: 50px;    /* Altura fixa */
+  width: 160px;
+  height: 50px;
   text-align: center;
-  font-size: 14px; /* Ajuste o tamanho da fonte  */
-  font-family: ;
-  
-  white-space: nowrap;  /* Faz o texto do botão não quebrar linha */
-  padding: 10px 20px;
   font-size: 16px;
+  white-space: nowrap;
+  padding: 10px 20px;
   cursor: pointer;
+  font-family: sans-serif;
 }
 
 button:hover {
   background-color: beige;
 }
+
 @font-face {
   font-family: "Choko";
   src: url("/fonts/Choko.ttf") format("truetype");
@@ -52,35 +41,32 @@ button:hover {
 
 h1 {
   font-family: "Choko", sans-serif;
-   font-size: 4rem;
-   color: orange;
+  font-size: 4rem;
+  color: orange;
+  margin-top: 30px;
 }
 
 h1 img {
-   /*padding: 0px; */
-  float:right;
+  float: right;
   height: 75px;
 }
 
 .container {
   display: flex;
-  gap: 40px; /* espaço entre as tabelas */
-  justify-content: center; /* centraliza horizontalmente */
-  align-items: flex-start; /* alinha pelo topo */
+  gap: 40px;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 table {
   border-collapse: collapse;
 }
 
-
 table.caca-palavras {
   margin: auto;
   border-collapse: collapse;
-  background-color: yellow; /* Fundo da grade */
+  background-color: yellow;
 }
-
-
 
 table.caca-palavras td {
   border: 1px solid black;
@@ -94,14 +80,14 @@ table.caca-palavras td {
 
 table.caca-palavras td.selected {
   background-color: green;
-  color: white; /* letras brancas sobre fundo verde */
+  color: white;
 }
+
 .participantes-tabela img {
   width: 150px;
   height: auto;
- 
- 
 }
+
 .about-container {
   max-width: 900px;
   margin: 0 auto;
@@ -121,7 +107,7 @@ table.caca-palavras td.selected {
 
 .tabelas-wrapper {
   display: flex;
-  gap: 2rem; /* espaço entre as tabelas */
+  gap: 2rem;
   justify-content: center;
   margin-top: 1rem;
 }
@@ -145,15 +131,12 @@ table.caca-palavras td.selected {
   object-fit: cover;
 }
 
-
-
 .botao2 h3 {
-    background-color: orange;
+  background-color: orange;
   color: black;
   border: 2px solid black;
   border-radius: 25px;
   padding: 10px 20px;
-     
   text-align: left;
   font-size: 16px;
   font-family: sans-serif;
@@ -164,7 +147,35 @@ table.caca-palavras td.selected {
   bottom: 20px;
   left: 20px;
   z-index: 1000;
-  line-height: 30px; /* Alinhamento vertical do texto dentro do h3 */
-  margin: 0;         /* Remove margem padrão do h3 */
+  line-height: 30px;
+  margin: 0;
+}
+
+/* 💠 Glass Effect (estilo Windows 7 Aero) */
+.glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Opcional: estilo glass também no título */
+h1.glass {
+  display: inline-block;
+  padding: 20px 40px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+
+/* Sombra para melhorar a legibilidade */
+  text-shadow:
+    2px 2px 3px black,
+    -2px -2px 3px black,
+    2px -2px 3px black,
+    -2px 2px 3px black;
 }
 

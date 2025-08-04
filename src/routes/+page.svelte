@@ -1,13 +1,9 @@
-
-
-
-<h1>
-Enchanted Hunt
-
-</h1>
+<h1 class="glass">Enchanted Hunt</h1>
 <hr />
-<br /><div class="container">
-  <table>
+
+<br />
+<div class="container">
+  <table class="glass">
     <tbody>
       <tr>
         <td>
@@ -24,7 +20,7 @@ Enchanted Hunt
     </tbody>
   </table>
 
-  <table>
+  <table class="glass">
     <tbody>
       <tr>
         <td style="text-align: right;">
@@ -34,10 +30,10 @@ Enchanted Hunt
     </tbody>
   </table>
 </div>
+
 <div class="botao2">
-  <h3>Log out</h3>
+  <h3 class="glass">Log out</h3>
 </div>
 
-
-
 <hr />
+
