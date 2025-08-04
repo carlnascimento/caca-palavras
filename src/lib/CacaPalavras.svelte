@@ -1,158 +1,185 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	let texto =
-		"A energia solar e a energia eólica são fontes de energia limpa. O uso de energia renovável é essencial para reduzir as emissões de carbono.";
+	const textos = [
+		"A energia solar é uma das fontes de energia limpa mais promissoras para o futuro.",
+		"A energia eólica transforma o vento em eletricidade sem emitir gases poluentes.",
+		"A energia hidráulica aproveita a força da água para gerar energia renovável.",
+		"A biomassa é uma alternativa ecológica para geração de energia.",
+		"A energia geotérmica utiliza o calor interno da Terra como fonte energética.",
+		"Painéis solares fotovoltaicos convertem luz do sol diretamente em eletricidade.",
+		"A energia das marés pode ser aproveitada como fonte limpa e previsível.",
+		"Carros elétricos ajudam a reduzir a emissão de carbono no transporte urbano.",
+		"A eficiência energética contribui para o uso consciente da eletricidade.",
+		"Fontes renováveis são essenciais para mitigar as mudanças climáticas.",
+		"O uso de energia limpa melhora a qualidade do ar nas cidades.",
+		"Tecnologias verdes promovem a sustentabilidade ambiental.",
+		"O sol é uma fonte inesgotável de energia renovável.",
+		"A redução de carbono é fundamental para frear o aquecimento global.",
+		"Investimentos em energia limpa crescem em todo o mundo."
+	];
 
-	const palavrasParaEncontrar = ["energia", "solar", "eólica", "limpa", "renovável", "carbono"];
+	let indiceAtual = 0;
+	let texto: string = textos[indiceAtual];
+
+	let palavrasParaEncontrar: string[] = [];
 	let palavrasEncontradas: string[] = [];
-
 	let pontuacao = 0;
 	let tempo = 0;
 	let intervalo: any;
 
-	// Iniciar o cronômetro ao montar o componente
-	onMount(() => {
-		intervalo = setInterval(() => tempo++, 1000);
-	});
+	function extrairPalavrasPrincipais(texto: string) {
+		const palavrasUnicas = new Set(
+			texto
+				.toLowerCase()
+				.replace(/[.,]/g, '')
+				.split(' ')
+				.filter((palavra) => palavra.length > 4)
+		);
+		return Array.from(palavrasUnicas).slice(0, 6);
+	}
 
-	// Parar cronômetro quando todas as palavras forem encontradas
+	function iniciarJogo() {
+		texto = textos[indiceAtual];
+		palavrasEncontradas = [];
+		palavrasParaEncontrar = extrairPalavrasPrincipais(texto);
+		pontuacao = 0;
+		tempo = 0;
+		clearInterval(intervalo);
+		intervalo = setInterval(() => tempo++, 1000);
+	}
+
+	onMount(iniciarJogo);
+
+	function selecionarTexto() {
+		const selecao = window.getSelection();
+		const textoSelecionado = selecao?.toString().trim().toLowerCase();
+		if (textoSelecionado && palavrasParaEncontrar.includes(textoSelecionado) && !palavrasEncontradas.includes(textoSelecionado)) {
+			palavrasEncontradas = [...palavrasEncontradas, textoSelecionado];
+			pontuacao += 10;
+		}
+		selecao?.removeAllRanges();
+	}
+
 	$: if (palavrasEncontradas.length === palavrasParaEncontrar.length) {
 		clearInterval(intervalo);
 	}
 
-	// Função para verificar se o texto selecionado é uma palavra válida
-	function verificarSelecao() {
-		const selecionadoBruto = window.getSelection()?.toString().trim().toLowerCase();
-
-		if (!selecionadoBruto) return;
-
-		const selecionado = selecionadoBruto
-			.normalize('NFD')
-			.replace(/[\u0300-\u036f]/g, '') // Remove acentos
-			.replace(/[.,!?;:]/g, ''); // Remove pontuação
-
-		for (const palavra of palavrasParaEncontrar) {
-			const palavraNormalizada = palavra
-				.normalize('NFD')
-				.replace(/[\u0300-\u036f]/g, '');
-
-			if (selecionado === palavraNormalizada && !palavrasEncontradas.includes(palavra)) {
-				palavrasEncontradas = [...palavrasEncontradas, palavra];
-				pontuacao += 10;
-			}
-		}
-	}
-
-	// Verifica se uma palavra já foi encontrada
-	function palavraJaEncontrada(palavra: string) {
-		return palavrasEncontradas.includes(palavra);
-	}
-
-	// Função para destacar visualmente as palavras no texto
-	function destacarTexto(texto: string): string {
-		let resultado = texto;
-
-		for (const palavra of palavrasParaEncontrar) {
-			const encontrado = palavrasEncontradas.includes(palavra);
-			const classe = encontrado ? "encontrada animada" : "para-encontrar";
-
-			const regex = new RegExp(`\\b(${palavra})\\b`, 'gi');
-			resultado = resultado.replace(regex, `<span class="${classe}">$1</span>`);
-		}
-
-		return resultado;
+	function proximoTexto() {
+		indiceAtual = (indiceAtual + 1) % textos.length;
+		iniciarJogo();
 	}
 </script>
 
 <style>
+	body {
+		background: linear-gradient(to right, #e0f7fa, #ffffff);
+		font-family: 'Segoe UI', sans-serif;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+		margin: 0;
+	}
+
 	.container {
 		display: flex;
-		gap: 2rem;
-		padding: 2rem;
-		flex-wrap: wrap;
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
+		max-width: 800px;
+		width: 100%;
 	}
 
-	.texto {
-		width: 60%;
-		border: 1px solid #ccc;
-		padding: 1rem;
+	.aero-box {
+		background: rgba(255, 255, 255, 0.25);
+		box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+		border-radius: 10px;
+		padding: 1rem 2rem;
+		width: 100%;
+		color: black;
+	}
+
+	.texto-jogo {
+		font-size: 1.2rem;
 		cursor: text;
 		user-select: text;
-		line-height: 1.6;
-		font-size: 1.1rem;
 	}
 
-	.tabela {
-		width: 30%;
-	}
-
-	.encontrada {
-		background-color: yellow;
-		font-weight: bold;
-	}
-
-	.para-encontrar {
-		background-color: transparent;
-	}
-
-	.encontrada-lista {
+	.palavras-encontradas {
 		color: green;
-		text-decoration: line-through;
 		font-weight: bold;
 	}
 
-	.lista-palavras li {
+	.botoes {
+		display: flex;
+		gap: 1rem;
+	}
+
+	button {
+		padding: 0.5rem 1rem;
+		border: none;
+		background: #00796b;
+		color: white;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+	button:hover {
+		background: #004d40;
+	}
+
+	h2 {
 		margin-bottom: 0.5rem;
-		font-size: 1.1rem;
 	}
 
-	.pontuacao {
-		margin-top: 1rem;
-		font-size: 1.2rem;
+	ul {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		justify-content: center;
+	}
+
+	li {
+		background-color: rgba(255, 255, 255, 0.5);
+		padding: 0.4rem 0.8rem;
+		border-radius: 5px;
+		color: black;
 		font-weight: bold;
 	}
 
-	.tempo {
-		margin-top: 0.5rem;
-		font-size: 1rem;
-		color: #555;
-	}
-
-	.animada {
-		animation: flash 0.5s ease-in-out;
-	}
-
-	@keyframes flash {
-		0% {
-			background-color: yellow;
-		}
-		50% {
-			background-color: orange;
-		}
-		100% {
-			background-color: yellow;
-		}
+	li.encontrada {
+		color: green;
+		background-color: rgba(200, 255, 200, 0.6);
 	}
 </style>
-
-<div class="container" on:mouseup={verificarSelecao}>
-	<div class="texto">
-		{@html destacarTexto(texto)}
+<center>
+<div class="container">
+	<div class="aero-box texto-jogo" on:mouseup={selecionarTexto}>
+		<p>{texto}</p>
 	</div>
 
-	<div class="tabela">
-		<h3>Palavras para encontrar</h3>
-		<ul class="lista-palavras">
+	<div class="aero-box">
+		<h2>Palavras para encontrar</h2>
+		<ul>
 			{#each palavrasParaEncontrar as palavra}
-				<li class:encontrada-lista={palavraJaEncontrada(palavra)}>
-					{palavra}
-				</li>
+				<li class={palavrasEncontradas.includes(palavra) ? 'encontrada' : ''}>{palavra}</li>
 			{/each}
 		</ul>
+	</div>
 
-		<div class="pontuacao">Pontuação: {pontuacao}</div>
-		<div class="tempo">Tempo: {tempo} segundos</div>
+	<div class="aero-box">
+		<p><strong>Pontuação:</strong> {pontuacao}</p>
+		<p><strong>Tempo:</strong> {tempo}s</p>
+		<div class="botoes">
+			<button on:click={proximoTexto}>Próximo Texto</button>
+			<button on:click={iniciarJogo}>Reiniciar</button>
+		</div>
 	</div>
 </div>
+</center>
 
