@@ -13,7 +13,7 @@
           <br /><br />
           <a href="/ajuda"><button>Help</button></a>
           <br /><br />
-          <a href="/ranking"><button>Ranking</button></a>
+          
           <br /><br />
         </td>
       </tr>
@@ -31,9 +31,7 @@
   </table>
 </div>
 
-<div class="botao2">
-  <h3 class="glass">Log out</h3>
-</div>
+
 
 <hr />
 
